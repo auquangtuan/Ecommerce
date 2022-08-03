@@ -1,15 +1,17 @@
 import React from 'react'
-import Announcement from '../../components/Announcement/Announcement'
-import Navbar from '../../components/Navbar/Navbar'
+import Categories from '../../components/Categories/Categories'
+import NewsLetter from '../../components/NewsLetter/NewsLetter'
+import Prouduct from '../../components/Product/Prouduct'
 import Slider from '../../components/Slider/Slider'
 
 export default function Home() {
   
   return (
     <div>
-      <Announcement />
-      <Navbar />
       <Slider />
+      <Categories />
+      <Prouduct />
+      <NewsLetter />
     </div>
   )
 }

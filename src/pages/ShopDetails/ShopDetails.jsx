@@ -1,42 +1,123 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { mobile } from "../../responsive";
-import { Add, Remove } from "@material-ui/icons";
+import { Add, AddShoppingCart, Remove } from "@material-ui/icons";
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { DOMAIN } from '../../util/setting/config';
+import axios from 'axios';
+import { ADD_CART, GET_ONE_PRODUCT } from '../../redux/Constants';
+import Prouduct from '../../components/Product/Prouduct';
+
 export default function ShopDetails() {
-    return (
-        <Container>
-            <Wrapper>
-                <ImgContainer>
-                    <Image src='https://bizweb.dktcdn.net/thumb/large/100/399/392/products/ao-thun-nam-co-tron-tay-ngan-hi-basic-fit-ao-phong-nam-khong-co-nhieu-ma-u-hiddle-8.jpg?v=1637318145000' />
-                </ImgContainer>
-                <InfoContainer>
-                    <Title>H04-T4 Áo thun HI Basic Fit nhiều màu-Kem</Title>
-                    <Desc>NỘI DUNG</Desc>
-                    <Price>155,000đ</Price>
-                    <FilterContainer>
-                        <Filter>
-                            <FilterTitle>Size</FilterTitle>
-                            <FilterSize>
-                                <FilterSizeOption >S</FilterSizeOption>
-                                <FilterSizeOption >M</FilterSizeOption>
-                                <FilterSizeOption >L</FilterSizeOption>
-                                <FilterSizeOption >XL</FilterSizeOption>
-                                <FilterSizeOption >XXL</FilterSizeOption>
-                            </FilterSize>
-                        </Filter>
-                    </FilterContainer>
-                    <AddContainer>
-                        <AmountContainer>
-                            <Remove />
-                            <Amount>12</Amount>
-                            <Add />
-                        </AmountContainer>
-                        <Button>ADD TO CART</Button>
-                    </AddContainer>
-                </InfoContainer>
-            </Wrapper>
-        </Container>
-    )
+  const params = useParams()
+  const { productDetail } = useSelector(state => state.ProductReducer)
+  console.log(productDetail)
+  const [num, setNum] = useState(1)
+  const [size, setSize] = useState(1)
+  console.log(size)
+  const handleChange = (e) => {
+    setSize(e.target.value)
+  }
+  const addCart = (item) => {
+    console.log("First Item", item)
+    let name;
+    let id = item.id;
+    let title = item.title
+    let price = item.price;
+    let discount = item.discount;
+    let thumbnail = item.thumbnail;
+    let sizeInt = parseInt(size)
+    if (sizeInt === 1) {
+      name = "S"
+    } else if (sizeInt === 2) {
+      name = "M"
+    } else if (sizeInt === 3) {
+      name = "L"
+    } else if (sizeInt === 4) {
+      name = "XL"
+    } else if (sizeInt === 5) {
+      name = "XXL"
+    } else {
+      name = 'Sai'
+    }
+    const items = { id, thumbnail, price, title, discount, number: num, size: size, sizeName: name }
+    console.log('items', items)
+    dispatch({
+      type: ADD_CART,
+      item: items
+    })
+  }
+  const handleClick = (boolean) => {
+    if (boolean) {
+      setNum(num + 1)
+    } else {
+      setNum(num === 1 ? 1 : num - 1)
+    }
+  }
+  const handleClicker = () => {
+    console.log("1")
+  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getOneProduct = async () => {
+      const getProductDetail = await axios({
+        method: 'get',
+        url: `${DOMAIN}/product/${params.id}`,
+        data: productDetail
+      }).then((data) => {
+        dispatch({
+          type: GET_ONE_PRODUCT,
+          productDetail: data.data
+        })
+      }).catch((err) => {
+        console.log("err")
+      })
+    }
+    getOneProduct()
+  }, [params.id])
+  return (
+    <Container>
+      <Wrapper>
+        {productDetail?.map((item, index) => {
+          return (
+            <Fragment>
+              <ImgContainer>
+                <Image src={item.thumbnail} />
+              </ImgContainer>
+              <InfoContainer>
+                <Title>{item.title}</Title>
+                <Desc>{item.description}</Desc>
+                <Discount>{item.discount.toLocaleString()}đ</Discount>
+                <Price>{item.price.toLocaleString()}đ</Price>
+                <FilterContainer>
+                  <Filter>
+                    <FilterTitle>Size</FilterTitle>
+                    <FilterSize onChange={handleChange}>
+                      {item.Sizes?.map((size, index) => {
+                        return (
+                          <FilterSizeOption value={size.id} key={index}>{size.size} ( Còn : {size.Product_Size?.amount} )</FilterSizeOption>
+                        )
+                      })}
+                    </FilterSize>
+                  </Filter>
+                </FilterContainer>
+                <AddContainer>
+                  <AmountContainer>
+                    <Remove onClick={() => handleClick(false)} />
+                    <Amount>{num}</Amount>
+                    <Add onClick={() => handleClick(true)} />
+                  </AmountContainer>
+                  <Button onClick={() => addCart(item)}>ADD TO CART</Button>
+                </AddContainer>
+              </InfoContainer>
+            </Fragment>
+          )
+        })}
+      </Wrapper>
+      <Prouduct onClick={() => handleClicker()} />
+    </Container>
+  )
 }
 const Container = styled.div``;
 
@@ -51,9 +132,9 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 90vh;
-  object-fit: cover;
+  width: 90%;
+  max-height: 70vh;
+  object-fit: top;
   ${mobile({ height: "40vh" })}
 `;
 
@@ -74,7 +155,13 @@ const Desc = styled.p`
 const Price = styled.span`
   font-weight: 100;
   font-size: 40px;
+  margin-left: 2rem;
+  text-decoration: line-through;
 `;
+const Discount = styled.span`
+  font-weight: 100;
+  font-size: 40px;
+`
 
 const FilterContainer = styled.div`
   width: 50%;

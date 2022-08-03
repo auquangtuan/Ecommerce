@@ -4,10 +4,13 @@ import { mobile } from "../../responsive";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const handleClick = () => {
-    
-    console.log(username)
-    console.log(password)
+  const handleClick = (e) => {
+    e.preventDefault()
+    let values = {
+      "email" : username,
+      "password" : password
+    }
+    console.log(values)
   };
   return (
     <Container>
@@ -15,7 +18,7 @@ export default function Login() {
         <Title>SIGN IN</Title>
         <Form>
           <Input
-            placeholder="username"
+            placeholder="email"
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
@@ -23,7 +26,7 @@ export default function Login() {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button onClick={()=>handleClick()}>
+          <Button onClick={handleClick}>
             LOGIN
           </Button>
           <Error>Something went wrong...</Error>

@@ -1,130 +1,194 @@
-import React from 'react'
-import styled from 'styled-components';
-import { mobile } from "../../responsive";
 import { Add, Remove } from "@material-ui/icons";
+import CloseIcon from '@mui/icons-material/Close';
+import React, { Fragment, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { DELETE_ITEM, SET_SIZE, TANG_GIAM_ITEM } from "../../redux/Constants";
+import { mobile } from "../../responsive";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { TextField } from "@material-ui/core";
+import { USER_LOGIN } from "../../util/setting/config";
+
 export default function Cart() {
+  const navigate = useNavigate()
+  const { carts } = useSelector(state => state.CartReducer)
+  const user = JSON.parse(localStorage.getItem(USER_LOGIN))
+    let userID = null;
+    if(user !== null) {
+        userID = user.id
+    }
+  const dispatch = useDispatch()
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+  const [fullname, setFullName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
+  const [note, setNote] = useState("")
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const renderArr = () => {
+    const arrProduct = []
+    for (let i = 0; i < carts.length; i++) {
+        arrProduct.push(
+            {
+                "number": carts[i].number,
+                "price": carts[i].price,
+                "discount": carts[i].discount,
+                "size_ID": carts[i].size,
+                "product_ID": carts[i].id,
+            }
+        )
+    }
+    return arrProduct
+}
+  const deleteItem = (num) => {
+    dispatch({
+      type: DELETE_ITEM,
+      num
+    })
+  }
+  const orderProduct = () => {
+    if(fullname.length < 2 || phone.length < 10) {
+      alert("Tên Phải Trên 2 Kí Tự, Và SĐT Phải 10 Trở Lên")
+    } else {
+
+      const values = {
+        "user_ID" : userID,
+        "fullname": fullname,
+        "email": email,
+        "phone": phone,
+        "address": address,
+        "note": note,
+        "arr" : 
+        renderArr()
+      }
+      console.log(values)
+    }
+  }
+  const handleNumber = (id, index, boolean) => {
+    dispatch({
+      type: TANG_GIAM_ITEM,
+      id,
+      index,
+      boolean
+    })
+  }
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   return (
     <Container>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => navigate('/')}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag ( {carts.length} ) </TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src='https://bizweb.dktcdn.net/thumb/large/100/399/392/products/ao-thun-nam-co-tron-tay-ngan-hi-basic-fit-ao-phong-nam-khong-co-nhieu-ma-u-hiddle-8.jpg?v=1637318145000' />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Áo Thun Title
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 123
-                  </ProductId>
-                  <ProductColor color='Orange' />
-                  <ProductSize>
-                    <b>Size:</b> XXL
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>12</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>
-                  15
-                </ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src='https://bizweb.dktcdn.net/thumb/large/100/399/392/products/ao-thun-nam-co-tron-tay-ngan-hi-basic-fit-ao-phong-nam-khong-co-nhieu-ma-u-hiddle-8.jpg?v=1637318145000' />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Áo Thun Title
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 123
-                  </ProductId>
-                  <ProductColor color='Orange' />
-                  <ProductSize>
-                    <b>Size:</b> XXL
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>12</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>
-                  15
-                </ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src='https://bizweb.dktcdn.net/thumb/large/100/399/392/products/ao-thun-nam-co-tron-tay-ngan-hi-basic-fit-ao-phong-nam-khong-co-nhieu-ma-u-hiddle-8.jpg?v=1637318145000' />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Áo Thun Title
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 123
-                  </ProductId>
-                  <ProductColor color='Orange' />
-                  <ProductSize>
-                    <b>Size:</b> XXL
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>12</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>
-                  15
-                </ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
+            {carts.map((item, index) => {
+              return (
+                <Fragment key={index}>
+
+                  <Product>
+
+                    <ProductDetail>
+                      <Image src={item.thumbnail} />
+                      <Details>
+                        <ProductName>
+                          <b>Sản Phẩm:</b> {item.title}
+                        </ProductName>
+                        <ProductId>
+                          <b>Mã Số:</b> 198734{item.id}
+                        </ProductId>
+                        <ProductSize>
+                          <b>Size:</b> {item.sizeName}
+                        </ProductSize>
+                      </Details>
+                    </ProductDetail>
+                    <PriceDetail>
+                      <ProductAmountContainer>
+                        <Remove onClick={() => handleNumber(item.id, index, false)} />
+                        <ProductAmount>{item.number}</ProductAmount>
+                        <Add onClick={() => handleNumber(item.id, index, true)} />
+                      </ProductAmountContainer>
+                      <ProductPrice>
+                        {(item.number * item.discount).toLocaleString()}đ
+                      </ProductPrice>
+                    </PriceDetail>
+                    <CloseIcon onClick={() => { deleteItem(item.id) }} style={{ cursor: 'pointer' }} />
+
+                  </Product>
+                  <Hr />
+                </Fragment>
+              )
+            })}
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 34</SummaryItemPrice>
+              <SummaryItemPrice>{carts.reduce((total, item) => { return total += (item.discount * item.number) }, 0).toLocaleString()}đ</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemText>Shipping</SummaryItemText>
+              <SummaryItemPrice>10.000đ</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemText>Mã Giảm Giá</SummaryItemText>
+              <SummaryItemPrice>0</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 34</SummaryItemPrice>
+              <SummaryItemPrice>{carts.reduce((total, item) => { return total += (item.discount * item.number) }, 10000).toLocaleString()}</SummaryItemPrice>
             </SummaryItem>
 
-            <Button>CHECKOUT NOW</Button>
+            <Buttons onClick={carts.length === 0 ? "" : (handleOpen)} >CHECKOUT NOW</Buttons>
           </Summary>
         </Bottom>
       </Wrapper>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h9" component="h4">
+            Nhập Thông Tin
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2, ml: 8 }}>
+            <TextField onChange={(e) => setFullName(e.target.value)} id="outlined-search" label="Họ và Tên" type="search" helperText={fullname.length < 2 ? "Tối Thiểu 2 ký tự" : "" } />
+            
+            <TextField onChange={(e) => setEmail(e.target.value)} style={{ marginLeft: 24 }} id="outlined-search" label="Email" type="search" helperText={email.length === 0 ? "Có Thể Để Trống" : "" }/>
+            <TextField onChange={(e) => setPhone(e.target.value)} id="outlined-search" label="Số Điện Thoại" type="search" helperText={phone.length < 10 ? "Yêu Cầu 10 Số" : "" }/>
+            <TextField onChange={(e) => setAddress(e.target.value)} style={{ marginLeft: 24 }} id="outlined-search" label="Địa Chỉ" type="search" helperText={address.length < 1 ? "Yêu cầu điền đúng địa chỉ" : "" }/>
+            <TextField onChange={(e) => setNote(e.target.value)} fullWidth label="Ghi Chú" id="fullWidth" helperText={note.length < 1 ? "Ghi chú thêm cho Shop tại đây" : "" }/>
+            <br />
+            <Button onClick={() => { orderProduct() }} type='submit' style={{ float: 'right', marginTop: 20 }} variant="contained">
+              Đặt Hàng
+            </Button>
+          </Typography>
+        </Box>
+      </Modal>
     </Container>
   )
 }
@@ -178,6 +242,7 @@ const Info = styled.div`
 
 const Product = styled.div`
   display: flex;
+  /* flex-direction: row-reverse; */
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
 `;
@@ -267,7 +332,7 @@ const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
 
-const Button = styled.button`
+const Buttons = styled.button`
   width: 100%;
   padding: 10px;
   background-color: black;

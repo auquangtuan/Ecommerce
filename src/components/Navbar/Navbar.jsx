@@ -3,9 +3,10 @@ import { Search, ShoppingCartOutlined } from '@material-ui/icons'
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 export default function Navbar() {
-
+    const {carts} = useSelector(state=>state.CartReducer)
     const navigate = useNavigate();
     
     return (
@@ -25,7 +26,7 @@ export default function Navbar() {
                 <MenuItem onClick={()=>navigate('/register')}>REGISTER</MenuItem>
                     <MenuItem onClick={()=>navigate('/login')}>SIGN IN</MenuItem>
                     <MenuItem>
-                        <Badge onClick={()=>navigate('/cart')} badgeContent={4} color="primary">
+                        <Badge onClick={()=>navigate('/cart')} badgeContent={carts.reduce((total)=>{return total+= 1},0) === 0 ? 0 : carts.reduce((total)=>{return total+= 1},0) } color="primary">
                             <ShoppingCartOutlined />
                         </Badge>
                     </MenuItem>

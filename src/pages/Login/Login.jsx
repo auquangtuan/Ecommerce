@@ -1,21 +1,50 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { LOGIN } from '../../redux/Constants';
 import { mobile } from "../../responsive";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux'
+import axios from 'axios';
+import { DOMAIN } from '../../util/setting/config';
+import { useNavigate } from 'react-router-dom'
+
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const notify = (content) => toast(content);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleClick = (e) => {
     e.preventDefault()
     let values = {
-      "email" : username,
-      "password" : password
+      "email": username,
+      "password": password
     }
-    console.log(values)
+    const loginUser = async () => {
+      await axios({
+        method: 'post',
+        url: `${DOMAIN}/users/login`,
+        data: values
+      }).then((values) => {
+        dispatch({
+          type: LOGIN,
+          values: values.data
+        })
+        navigate('/')
+      }).catch((err) => {
+        return (
+          notify("Sai Thông Tin Đăng Nhập")
+        )
+      })
+    }
+    loginUser()
   };
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
+        <ToastContainer />
         <Form>
           <Input
             placeholder="email"
@@ -31,7 +60,7 @@ export default function Login() {
           </Button>
           <Error>Something went wrong...</Error>
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Link onClick={()=>navigate('/register')}>CREATE A NEW ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>

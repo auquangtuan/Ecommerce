@@ -1,7 +1,9 @@
-import React from 'react'
+import { Language, NotificationsNone, Settings } from "@material-ui/icons";
+import React from 'react';
 import "./HeaderAdmin.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+
 export default function HeaderAdmin() {
+    
     return (
         <div>
             <div className="topbar">
@@ -21,7 +23,6 @@ export default function HeaderAdmin() {
                         <div className="topbarIconContainer">
                             <Settings />
                         </div>
-                        <img src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="topAvatar" />
                     </div>
                 </div>
             </div>

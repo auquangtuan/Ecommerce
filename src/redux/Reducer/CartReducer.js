@@ -1,9 +1,10 @@
-import { ADD_CART, DELETE_ITEM, SET_SIZE, TANG_GIAM_ITEM } from "../Constants";
+
+import { ADD_CART, CART, DELETE_ITEM, DONE, TANG_GIAM_ITEM } from "../Constants";
 
 let cart = []
 
-if (localStorage.getItem("CART")) {
-    cart = JSON.parse(localStorage.getItem("CART"));
+if (localStorage.getItem(CART)) {
+    cart = JSON.parse(localStorage.getItem(CART));
 }
 const stateDefault = {
     carts: cart
@@ -26,7 +27,7 @@ export const CartReducer = (state = stateDefault, action) => {
                     cartUpdate.push(action.item)
                 }
             }
-            localStorage.setItem("CART", JSON.stringify(cartUpdate));
+            localStorage.setItem(CART, JSON.stringify(cartUpdate));
             state.carts = cartUpdate;
             return { ...state }
         }
@@ -46,7 +47,7 @@ export const CartReducer = (state = stateDefault, action) => {
                     }
                 }
             }
-            localStorage.setItem("CART", JSON.stringify(cartUpdate));
+            localStorage.setItem(CART, JSON.stringify(cartUpdate));
             state.carts = cartUpdate;
             return { ...state }
         }
@@ -56,14 +57,13 @@ export const CartReducer = (state = stateDefault, action) => {
             if (i !== -1) {
                 cartUpdate.splice(i, 1);
             }
-            localStorage.setItem("CART", JSON.stringify(cartUpdate));
+            localStorage.setItem(CART, JSON.stringify(cartUpdate));
             state.carts = cartUpdate;
             return { ...state }
         }
-        case "DONE": {
+        case DONE: {
             let cartUpdate = [];
-            alert("Đặt Hàng Thành Công")
-            localStorage.removeItem("CART");
+            localStorage.removeItem(CART);
             state.carts = cartUpdate;
             return { ...state }
         }

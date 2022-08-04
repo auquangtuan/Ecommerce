@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export default function Announcement() {
   return (
-    <Container>Announcement</Container>
+    <Container>ADMIN : nothing@gmail.com 123123 User : nothings@gmail.com 123123</Container>
   )
 }
 const Container = styled.div`

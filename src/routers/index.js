@@ -1,3 +1,5 @@
+import DonHang from "../components/DonHang/DonHang";
+import Categories from "../components/ProductCategories/Categories";
 import HomeAdmin from "../pages/Admin/HomeAdmin/HomeAdmin";
 import Product from "../pages/Admin/Product/Product";
 import User from "../pages/Admin/User/User";
@@ -20,8 +22,10 @@ const publicRoutes = [
     { path: '/cart', component : Cart},
     { path: '/admin', component : HomeAdmin, layout : AdminTemplate},
     { path: '/admin/products', component : Product, layout : AdminTemplate},
-    { path: '/admin/users', component : User, layout : AdminTemplate},
+    { path: '/admin/users/:id', component : User, layout : AdminTemplate},
     { path: '/render', component : RenderUser, layout : AdminTemplate},
+    { path: '/donhang', component : DonHang},
+    { path: '/categories/:id/:name', component : Categories},
 
 ];
 

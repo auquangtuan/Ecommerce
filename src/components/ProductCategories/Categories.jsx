@@ -2,7 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import Prouduct from '../../components/Product/Prouduct';
 import { mobile } from "../../responsive";
-export default function Shop() {
+import ProuductCategories from './ProductCategories';
+
+export default function Categories() {
   return (
     <Container>
       <Title>Sản Phẩm</Title>
@@ -36,7 +38,7 @@ export default function Shop() {
           </Select>
         </Filter>
       </FilterContainer>
-      <Prouduct />
+      <ProuductCategories />
     </Container>
   )
 }

@@ -1,6 +1,6 @@
 # Ecommerce
 #### Website đặt quần áo
-#### Deploy tại : auquangtuan.surge.sh
+#### Deploy tại : https://auquangtuan.surge.sh
 
 ### Người Tạo : Âu Quang Tuấn
 ### Ngày Tạo : 02/08/2022 16:04

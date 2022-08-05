@@ -16,8 +16,8 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Prouduct() {
     const notify = () => toast("Thêm Vào Giỏ Hàng Thành Công!");
     const { product } = useSelector(state => state.ProductReducer)
+    const { limited } = useSelector(state => state.ProductReducer)
     const dispatch = useDispatch();
-    const [limit, setLimit] = useState(12)
     const [current, setCurrent] = useState(1)
     const [offset, setOfset] = useState(0)
     const [totalPage, setTotalPage] = useState(0)
@@ -37,10 +37,10 @@ export default function Prouduct() {
         const getProduct = async () => {
             const getProduct = await axios({
                 method: 'get',
-                url: `${DOMAIN}/product?limit=${limit}&offset=${offset}`,
+                url: `${DOMAIN}/product?limit=${limited}&offset=${offset}`,
                 data: product
             }).then((data) => {
-                setTotalPage(Math.ceil(data.data.count / limit));
+                setTotalPage(Math.ceil(data.data.count / limited));
                 dispatch({
                     type: GET_ALL_PRODUCT,
                     product: data.data.rows
@@ -50,7 +50,7 @@ export default function Prouduct() {
             })
         }
         getProduct()
-    }, [limit, offset])
+    }, [offset, limited])
     const handleChange = (event, value) => {
         window.scrollTo(0, 1400)
         setOfset(value - 1)
@@ -65,6 +65,9 @@ export default function Prouduct() {
                         <Container key={index}>
                             <Circle />
                             <Image src={item.thumbnail} />
+                            <br/>
+                            <div>{item.title.slice(0,31)}...</div>
+                            <div>{item.discount}</div>
                             <Info>
                                 <Icon>
                                     <ShoppingCartOutlined onClick={() => { AddCart(item) }} />
@@ -120,6 +123,7 @@ const Container = styled.div`
   min-width: 280px;
   height: 350px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f5fbfd;

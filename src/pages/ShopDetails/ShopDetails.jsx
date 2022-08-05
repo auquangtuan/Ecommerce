@@ -39,7 +39,6 @@ export default function ShopDetails() {
       name = 'Sai'
     }
     const items = { id, thumbnail, price, title, discount, number: num, size: size, sizeName: name }
-    console.log('items', items)
     dispatch({
       type: ADD_CART,
       item: items

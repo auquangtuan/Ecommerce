@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from "react-router-dom";
-import './Product.css'
 import { Publish } from "@material-ui/icons";
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import { DOMAIN } from '../../../util/setting/config';
+import './Product.css';
 
 export default function Product() {
   const [product,setProduct] = useState([])
-  console.log(product)
   const params = useParams()
   useEffect(()=>{
     const getOneProduct = async () => {

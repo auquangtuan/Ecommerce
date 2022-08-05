@@ -36,7 +36,6 @@ export default function User() {
         setAge(parseInt(event.target.value));
     };
     const [user, setUser] = useState([])
-    console.log(user)
     const params = useParams()
     const [change,setChange] = useState(false)
     const putUser = (e) => {

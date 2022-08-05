@@ -6,3 +6,5 @@ export const TANG_GIAM_ITEM = "TANG_GIAM_ITEM";
 export const CART = "CART";
 export const LOGIN = "LOGIN";
 export const DONE = "DONE";
+export const CHANGE_LIMIT = "CHANGE_LIMIT";
+export const SORT = "SORT";

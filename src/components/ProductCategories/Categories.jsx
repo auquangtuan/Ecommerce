@@ -1,44 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Prouduct from '../../components/Product/Prouduct';
 import { mobile } from "../../responsive";
 import ProuductCategories from './ProductCategories';
 
 export default function Categories() {
+  const params = useParams()
+  const paramsInt = parseInt(params.id)
+  const [number,setNumber] = useState(paramsInt) 
+  const [numberone,setNumberone] = useState(1)
+  const handleChange = (e) => {
+    setNumber(parseInt(e.target.value))
+  }
+  const handleSort = (e) => {
+    setNumberone(parseInt(e.target.value))
+  } 
   return (
     <Container>
       <Title>Sản Phẩm</Title>
       <FilterContainer>
         <Filter>
-          <FilterText>Filter Products:</FilterText>
-          <Select name="color">
-            <Option disabled>Color</Option>
-            <Option>white</Option>
-            <Option>black</Option>
-            <Option>red</Option>
-            <Option>blue</Option>
-            <Option>yellow</Option>
-            <Option>green</Option>
-          </Select>
-          <Select name="size">
-            <Option disabled>Size</Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+          <FilterText>Filter Category:</FilterText>
+          <Select onChange={handleChange} name="color">
+            <Option disabled>Category</Option>
+            <Option value='1' >Áo Polo</Option>
+            <Option value='2' >Áo Thun Cổ Tròn</Option>
+            <Option value='3' >Áo Khoác Nam</Option>
+            <Option value='4' >Quần Nam</Option>
           </Select>
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option value="newest">Newest</Option>
-            <Option value="asc">Price (asc)</Option>
-            <Option value="desc">Price (desc)</Option>
+          <Select onChange={handleSort}>
+            <Option value="1">Name (ASC)</Option>
+            <Option value="2">Name (DESC)</Option>
+            <Option value="3"> Price (ASC)</Option>
+            <Option value="4"> Price (DESC)</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <ProuductCategories />
+      <ProuductCategories data={number} sort={numberone} />
     </Container>
   )
 }

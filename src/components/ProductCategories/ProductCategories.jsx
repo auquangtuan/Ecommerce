@@ -1,23 +1,23 @@
-import React, { Fragment, useEffect, useState } from 'react'
 import {
     FavoriteBorderOutlined,
     SearchOutlined,
-    ShoppingCartOutlined,
+    ShoppingCartOutlined
 } from "@material-ui/icons";
-import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import Pagination from '@mui/material/Pagination';
-import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { DOMAIN } from '../../util/setting/config';
-import { ADD_CART } from '../../redux/Constants';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function ProuductCategories() {
+import styled from "styled-components";
+import { ADD_CART } from '../../redux/Constants';
+import { DOMAIN } from '../../util/setting/config';
+export default function ProuductCategories(props) {
     const params = useParams()
     const notify = () => toast("Thêm Vào Giỏ Hàng Thành Công!");
     const dispatch = useDispatch()
     const [categories, setCategories] = useState([])
+    console.log(categories)
     const navigate = useNavigate()
     const AddCart = (item) => {
         notify();
@@ -29,6 +29,17 @@ export default function ProuductCategories() {
     const redirect = (number) => {
         window.scrollTo(0, 0)
         navigate(`/product/${number}`)
+    }
+    params.id = props.data
+    const number = parseInt(props.sort)
+    if (number === 1) {
+        (categories[0]?.Products?.sort((a, b) => a.title.localeCompare(b.title)))
+    } else if (number === 2) {
+        (categories[0]?.Products?.reverse())
+    } else if (number === 3) {
+        (categories[0]?.Products?.sort(function (a, b) { return a.discount - b.discount }))
+    } else {
+        (categories[0]?.Products?.sort(function (a, b) { return b.discount - a.discount }))
     }
     useEffect(() => {
         const getCategiries = async () => {
@@ -43,7 +54,7 @@ export default function ProuductCategories() {
             })
         }
         getCategiries()
-    }, [])
+    }, [props.data, params])
     
     return (
         <Fragment>
@@ -54,6 +65,9 @@ export default function ProuductCategories() {
                         <Container key={index}>
                             <Circle />
                             <Image src={item.thumbnail} />
+                            <br/>
+                            <div>{item.title}</div>
+                            <div>{item.discount}</div>
                             <Info>
                                 <Icon>
                                     <ShoppingCartOutlined onClick={() => { AddCart(item) }} />
@@ -106,6 +120,7 @@ const Container = styled.div`
   min-width: 280px;
   height: 350px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f5fbfd;

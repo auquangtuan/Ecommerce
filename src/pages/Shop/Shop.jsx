@@ -1,38 +1,43 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Prouduct from '../../components/Product/Prouduct';
+import { CHANGE_LIMIT, SORT } from '../../redux/Constants';
 import { mobile } from "../../responsive";
 export default function Shop() {
+  const dispatch = useDispatch()
+  const handleChange = (e) => {
+    dispatch({
+      type: CHANGE_LIMIT,
+      number: e.target.value
+    })
+  }
+  const handleChangeSort = (e) => {
+    dispatch({
+      type: SORT,
+      value: e.target.value
+    })
+  }
   return (
     <Container>
-      <Title>Sản Phẩm</Title>
+      <Title>Tất Cả Sản Phẩm</Title>
       <FilterContainer>
         <Filter>
-          <FilterText>Filter Products:</FilterText>
-          <Select name="color">
-            <Option disabled>Color</Option>
-            <Option>white</Option>
-            <Option>black</Option>
-            <Option>red</Option>
-            <Option>blue</Option>
-            <Option>yellow</Option>
-            <Option>green</Option>
-          </Select>
-          <Select name="size">
-            <Option disabled>Size</Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+          <FilterText>Số Lượng:</FilterText>
+          <Select onChange={handleChange} name="color">
+            <Option value='12' >12</Option>
+            <Option value='6' >6</Option>
+            <Option value='24' >24</Option>
+            <Option value='36' >36</Option>
           </Select>
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option value="newest">Newest</Option>
-            <Option value="asc">Price (asc)</Option>
-            <Option value="desc">Price (desc)</Option>
+          <Select onChange={handleChangeSort}>
+            <Option value="1">Name (ASC)</Option>
+            <Option value="2">Name (DESC)</Option>
+            <Option value="3"> Price (ASC)</Option>
+            <Option value="4">Price (DESC)</Option>
           </Select>
         </Filter>
       </FilterContainer>

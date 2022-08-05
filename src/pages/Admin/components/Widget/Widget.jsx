@@ -65,7 +65,7 @@ export default function Widget() {
             <th className="widgetLgTh">Địa Chỉ</th>
             <th className="widgetLgTh">Status</th>
           </tr>
-          {order.map((order, index) => {
+          {order.filter(sp=>sp.status === 1).map((order, index) => {
             return (
                 <tr className="widgetLgTr">
                   <td className="widgetLgUser">

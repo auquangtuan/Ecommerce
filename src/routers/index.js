@@ -1,5 +1,6 @@
 import DonHang from "../components/DonHang/DonHang";
 import Categories from "../components/ProductCategories/Categories";
+import Confirm from "../pages/Admin/Confirm/Confirm";
 import HomeAdmin from "../pages/Admin/HomeAdmin/HomeAdmin";
 import AllProduct from "../pages/Admin/Product/AllProduct";
 import Product from "../pages/Admin/Product/Product";
@@ -25,6 +26,7 @@ const publicRoutes = [
     { path: '/admin', component : HomeAdmin, layout : AdminTemplate},
     { path: '/admin/products/:id', component : Product, layout : AdminTemplate},
     { path: '/admin/products', component : AllProduct, layout : AdminTemplate},
+    { path: '/admin/confirm', component : Confirm, layout : AdminTemplate},
     { path: '/admin/users', component : RenderUsers, layout : AdminTemplate},
     { path: '/admin/users/:id', component : User, layout : AdminTemplate},
     { path: '/render', component : RenderUser, layout : AdminTemplate},

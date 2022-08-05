@@ -64,7 +64,7 @@ export default function SideBar() {
               <AttachMoney className="sidebarIcon" />
               New User
             </li>
-            <li className="sidebarListItem">
+            <li onClick={()=>navigate('/admin/confirm')} className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports
             </li>

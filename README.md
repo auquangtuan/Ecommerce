@@ -5,7 +5,7 @@
 ### Người Tạo : Âu Quang Tuấn
 ### Ngày Tạo : 02/08/2022 16:04
 ### Ngày Hoàn Thành : "Chưa Hoàn Thành, đang deploy để xem thêm"
-### Cần có thêm  : "ADMIN Dashboard, chắc chắn, và filter quần áo"
+### Cần có thêm  : "ADMIN Dashboard (đã có , cần nhiều hơn), và filter quần áo"
 
 #### Có tham khảo video hướng dẫn code (Chỉ front-end) và code lại (vì video code styled component nên em khá bỡ ngỡ, nhưng em vẫn hiểu những gì mình copy)
 #### Xử lí logic và redux em tự làm. Video trên mạng em chỉ xem và code theo phần giao diện. không bao gồm backend và xử lí

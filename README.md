@@ -2,12 +2,12 @@
 #### Website đặt quần áo
 #### Deploy tại : https://auquangtuan.surge.sh
 
-#### Chức Năng : Đăng Nhập, Đăng Kí, Nếu là User có thể xem đơn hàng của mình, xem trạng thái đơn, bấm đã nhận hàng khi admin đã xác nhận.
-#### ADMIN có thể xem doanh thu, crud cơ bản 
+#### Chức Năng : 
+#### USER : Đăng Nhập, Đăng Kí, Nếu là User có thể xem đơn hàng của mình, xem trạng thái đơn, bấm đã nhận hàng khi admin đã xác nhận.
+#### ADMIN :  Có thể xem doanh thu, CRUD cơ bản 
 
 ### Người Tạo : Âu Quang Tuấn
-### Ngày Tạo : 02/08/2022 16:04
-### Ngày Hoàn Thành : "Chưa Hoàn Thành"
+### Trạng Thái : "Chưa Hoàn Thành"
 ### Cần có thêm  : "ADMIN Dashboard (đã có , cần nhiều hơn)"
 
 #### Có tham khảo video hướng dẫn code (Chỉ front-end) và code lại (vì video code styled component nên em khá bỡ ngỡ, nhưng em vẫn hiểu những gì mình copy)

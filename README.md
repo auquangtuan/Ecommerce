@@ -1,7 +1,7 @@
 # Ecommerce
 #### Website đặt quần áo
 #### Deploy tại : https://auquangtuan.surge.sh
-
+##### heroku 30p không online sẽ off server nên anh chị chịu khó đợi xíu (5-10s) heroku bật lại nếu mới vào nhé. Sau đó sẽ nhanh thôi ạ.  Em cảm ơn. 
 #### Chức Năng : 
 #### USER : Đăng Nhập, Đăng Kí, Nếu là User có thể xem đơn hàng của mình, xem trạng thái đơn, bấm đã nhận hàng khi admin đã xác nhận.
 #### ADMIN :  Có thể xem doanh thu, CRUD cơ bản 

@@ -6,7 +6,8 @@ import axios from 'axios';
 
 export default function Revanue() {
     const [order, setOrder] = useState([])
-    console.log(order)
+    const [orders, setOrders] = useState([])
+
     useEffect(() => {
         axios({
             method: 'get',
@@ -14,6 +15,15 @@ export default function Revanue() {
             data: order
         }).then((data) => {
             setOrder(data.data)
+        }).catch((err) => {
+            console.log("err")
+        })
+        axios({
+            method: 'get',
+            url: `${DOMAIN}/order`,
+            data: order
+        }).then((data) => {
+            setOrders(data.data)
         }).catch((err) => {
             console.log("err")
         })
@@ -40,7 +50,7 @@ export default function Revanue() {
             <div className="featuredItem">
                 <span className="featuredTitle">Số Đơn Hàng</span>
                 <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">$4,415</span>
+                    <span className="featuredMoney">{orders.reduce((toal)=>{return (toal += 1)},0)}</span>
                     <span className="featuredMoneyRate">
                         -1.4 <ArrowDownward className="featuredIcon negative" />
                     </span>
@@ -50,8 +60,8 @@ export default function Revanue() {
             <div className="featuredItem">
                 <span className="featuredTitle">Chờ Xác Nhận</span>
                 <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">{order.reduce((total, item) => {
-                        return total += (item.Order?.status === 1)
+                    <span className="featuredMoney">{orders.reduce((total, item) => {
+                        return total += (item.status === 1)
                     }, 0)}</span>
                     <span className="featuredMoneyRate">
                         +2.4 <ArrowUpward className="featuredIcon" />

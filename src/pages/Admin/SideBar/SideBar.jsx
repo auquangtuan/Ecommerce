@@ -64,10 +64,10 @@ export default function SideBar() {
               <AttachMoney className="sidebarIcon" />
               New User
             </li>
-            <li onClick={()=>navigate('/admin/confirm')} className="sidebarListItem">
+            <NavLink to='/admin/confirm' className="sidebarListItem">
               <BarChart className="sidebarIcon" />
-              Reports
-            </li>
+              Status
+            </NavLink>
           </ul>
         </div>
         <div className="sidebarMenu">

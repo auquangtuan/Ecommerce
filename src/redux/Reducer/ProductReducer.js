@@ -19,7 +19,6 @@ export const ProductReducer = ( state = stateDefault, action) => {
             return {...state}
         }
         case CHANGE_LIMIT : {
-            console.log(action)
             parseInt(action.number)
             state.limited = action.number
             state.offsets = 0

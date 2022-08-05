@@ -5,7 +5,6 @@ import { DOMAIN } from '../../../util/setting/config'
 export default function AllProduct() {
     const navigate = useNavigate()
     const [product, setProduct] = useState([])
-    console.log(product)
     useEffect(() => {
         const getAllProduct = async () => {
             axios({

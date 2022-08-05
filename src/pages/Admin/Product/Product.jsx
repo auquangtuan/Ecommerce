@@ -10,7 +10,6 @@ export default function Product() {
   const notify = (content) => toast(content);
   const [product, setProduct] = useState([])
   const [thumbnail, setThumbnail] = useState()
-  console.log(thumbnail)
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState()
   const [discount, setDiscount] = useState()

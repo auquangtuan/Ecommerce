@@ -15,11 +15,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function ProuductCategories() {
     const params = useParams()
-    console.log(params.id)
     const notify = () => toast("Thêm Vào Giỏ Hàng Thành Công!");
     const dispatch = useDispatch()
     const [categories, setCategories] = useState([])
-    console.log("123",categories)
     const navigate = useNavigate()
     const AddCart = (item) => {
         notify();

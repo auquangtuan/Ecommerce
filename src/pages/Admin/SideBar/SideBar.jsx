@@ -14,26 +14,27 @@ import {
   WorkOutline,
   Report,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 export default function SideBar() {
+  const navigate = useNavigate()
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/admin" className="link">
+            <NavLink  to="/admin" >
             <li className="sidebarListItem active">
               <LineStyle className="sidebarIcon" />
               Home Admin
             </li>
-            </Link>
-            <Link to="/" className="link">
+            </NavLink>
+            <NavLink to="/" className="link">
             <li className="sidebarListItem">
               <LineStyle className="sidebarIcon" />
               Home Client
             </li>
-            </Link>
+            </NavLink>
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
@@ -47,21 +48,21 @@ export default function SideBar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            {/* <Link to="/admin/users" className="link">
+            <NavLink to="/admin/users" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
-            </Link> */}
-            <Link to="/admin/products" className="link">
+            </NavLink>
+            <NavLink to="/admin/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Products
               </li>
-            </Link>
-            <li className="sidebarListItem">
+            </NavLink>
+            <li onClick={()=>navigate('/admin/newUser')} className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
-              Transactions
+              New User
             </li>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />

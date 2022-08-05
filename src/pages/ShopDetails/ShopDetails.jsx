@@ -12,15 +12,12 @@ import Prouduct from '../../components/Product/Prouduct';
 export default function ShopDetails() {
   const params = useParams()
   const { productDetail } = useSelector(state => state.ProductReducer)
-  console.log(productDetail)
   const [num, setNum] = useState(1)
   const [size, setSize] = useState(1)
-  console.log(size)
   const handleChange = (e) => {
     setSize(e.target.value)
   }
   const addCart = (item) => {
-    console.log("First Item", item)
     let name;
     let id = item.id;
     let title = item.title
@@ -56,7 +53,6 @@ export default function ShopDetails() {
     }
   }
   const handleClicker = () => {
-    console.log("1")
   }
   const dispatch = useDispatch();
   useEffect(() => {

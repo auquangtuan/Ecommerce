@@ -11,24 +11,58 @@ import Select from '@mui/material/Select';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { DOMAIN } from '../../../util/setting/config';
+import { DOMAIN, TOKEN } from '../../../util/setting/config';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./User.css";
+
 export default function User() {
+    const notify = (content) => toast(content);
+    const [fullname, setFullname] = useState("")
+    const [email, setEmail] = useState("")
+    const [address, setAddress] = useState("")
+    const [phone, setPhone] = useState("")
+
     const [age, setAge] = React.useState('');
 
     const handleChange = (event) => {
-      setAge(event.target.value);
+        setAge(parseInt(event.target.value));
     };
     const [user, setUser] = useState([])
     console.log(user)
     const params = useParams()
-    const handleChanges = (e) => {
-        console.log(e.target.value)
-    }
+    const [change,setChange] = useState(false)
     const putUser = (e) => {
         e.preventDefault()
-        console.log(age)
-        console.log(handleChanges())
+        const userUpdate = {
+            "fullname": fullname || user.fullname,
+            "email": email || user.email,
+            "address": address || user.address,
+            "phone": phone || user.phone,
+            "role_id": age || user.role_id
+        }
+        const putUser = async () => {
+            await axios({
+                method: "PUT",
+                url: `${DOMAIN}/users/${user.id}`,
+                data : userUpdate,
+                headers : { "asscess_Token" : localStorage.getItem(TOKEN)}
+            }).then(()=>{
+                setChange(!change)
+                notify("Chỉnh Sửa Thành Công")
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+        putUser()
+
     }
     useEffect(() => {
         const getOneUser = async () => {
@@ -43,9 +77,10 @@ export default function User() {
             })
         }
         getOneUser()
-    }, [])
+    }, [change])
     return (
         <div className="user">
+            <ToastContainer />
             <div className="userTitleContainer">
                 <h1 className="userTitle">Edit User</h1>
                 <Link to="/newUser">
@@ -56,7 +91,7 @@ export default function User() {
                 <div className="userShow">
                     <div className="userShowTop">
                         <img
-                            src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                            src="https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"
                             alt=""
                             className="userShowImg"
                         />
@@ -80,10 +115,7 @@ export default function User() {
                             <PhoneAndroid className="userShowIcon" />
                             <span className="userShowInfoTitle">{user.phone || ""}</span>
                         </div>
-                        {/* <div className="userShowInfo">
-                                    <MailOutline className="userShowIcon" />
-                                    <span className="userShowInfoTitle">{user.email || ""}</span>
-                                </div> */}
+
                         <div className="userShowInfo">
                             <LocationSearching className="userShowIcon" />
                             <span className="userShowInfoTitle">{user.address || ""}</span>
@@ -92,38 +124,47 @@ export default function User() {
                 </div>
                 <div className="userUpdate">
                     <span className="userUpdateTitle">Edit</span>
-                    <form onChange={handleChanges} className="userUpdateForm">
+                    <div className="userUpdateForm">
                         <div className="userUpdateLeft">
                             <div className="userUpdateItem">
                                 <label>Họ và Tên</label>
                                 <input
+                                    required
+                                    onChange={(e) => setFullname(e.target.value)}
+                                    defaultValue={user.fullname}
                                     type="text"
-                                    name='fullname'
-                                    placeholder={user.fullname}
                                     className="userUpdateInput"
                                 />
                             </div>
                             <div className="userUpdateItem">
-                                <label>Email</label>
+                                <label for='email'>Email</label>
                                 <input
-                                    type="text"
-                                    placeholder={user.email}
-                                    className="userUpdateInput"
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="email"
+                                    name="email"
+                                    defaultValue={user.email}
+                                    className="userUpdateInput"  
                                 />
                             </div>
                             <div className="userUpdateItem">
                                 <label>SĐT</label>
+                                
                                 <input
-                                    type="text"
-                                    placeholder={user.phone}
+                                    required
+                                    type="tel"
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    defaultValue={user.phone}
                                     className="userUpdateInput"
                                 />
                             </div>
                             <div className="userUpdateItem">
                                 <label>address</label>
                                 <input
+                                    required
                                     type="text"
-                                    placeholder={user.address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                    defaultValue={user.address}
                                     className="userUpdateInput"
                                 />
                             </div>
@@ -146,9 +187,42 @@ export default function User() {
                             </Box>
                             <button type='submit' onClick={putUser} className="userUpdateButton">Update</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
+            <TableContainer component={Paper} style={{ marginTop: '2rem' }}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Họ Và tên</TableCell>
+                            <TableCell align="right">Email</TableCell>
+                            <TableCell align="right">Số Điện Thoại</TableCell>
+                            <TableCell align="right">Địa Chỉ</TableCell>
+                            <TableCell align="right">Note</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {user.Orders?.map((row) => (
+                            <TableRow
+                                key={row.name}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.id}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                    {row.fullname}
+                                </TableCell>
+                                <TableCell align="right">{row.email}</TableCell>
+                                <TableCell align="right">{row.phone}</TableCell>
+                                <TableCell align="right">{row.address}</TableCell>
+                                <TableCell align="right">{row.note}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }

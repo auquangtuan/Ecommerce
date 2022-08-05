@@ -1,7 +1,4 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -10,184 +7,70 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+import axios from 'axios';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DOMAIN } from '../../util/setting/config';
 
 export default function RenderUsers() {
-    const [open, setOpen] = React.useState(false);
+    const [users, setUsers] = React.useState([])
+    const navigate = useNavigate()
+    React.useEffect(() => {
+        const renderAllUser = async () => {
+            await axios({
+                method: "GET",
+                url: `${DOMAIN}/users`,
+                data: users
+            }).then((data) => {
+                setUsers(data.data)
+            }).catch((err) => {
+                console.log("err")
+            })
+        }
+        renderAllUser()
+    }, [])
     return (
         <TableContainer component={Paper}>
+            <button className="userAddButton" style={{float: 'right', marginBottom : '1rem'}}>Create</button>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Họ Và Tên</TableCell>
+                        <TableCell align="right">Email</TableCell>
+                        <TableCell align="right">Số Điện Thoại</TableCell>
+                        <TableCell align="right">Địa Chỉ</TableCell>
+                        <TableCell align="right">Tổng Số Đơn Đặt</TableCell>
+                        <TableCell align="right">Xem Thêm</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <React.Fragment>
-                        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                            <TableCell>
-                                <IconButton
-                                    aria-label="expand row"
-                                    size="small"
-                                    onClick={() => setOpen(!open)}
-                                >
-                                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                </IconButton>
-                            </TableCell>
-                            <TableCell component="th" scope="row">
-                                Name
-                            </TableCell>
-                            <TableCell align="right">calories</TableCell>
-                            <TableCell align="right">fat</TableCell>
-                            <TableCell align="right">carbs</TableCell>
-                            <TableCell align="right">protein</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                                <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Box sx={{ margin: 1 }}>
-                                        <Typography variant="h6" gutterBottom component="div">
-                                            History
-                                        </Typography>
-                                        <Table size="small" aria-label="purchases">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Date</TableCell>
-                                                    <TableCell>Customer</TableCell>
-                                                    <TableCell align="right">Amount</TableCell>
-                                                    <TableCell align="right">Total price ($)</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                    <TableRow>
-                                                        <TableCell component="th" scope="row">
-                                                           history rơ date
-                                                        </TableCell>
-                                                        <TableCell>customer ID history rơ</TableCell>
-                                                        <TableCell align="right">history rơ amunt</TableCell>
-                                                        <TableCell align="right">
-                                                            tính toán gì đó
-                                                        </TableCell>
-                                                    </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </Box>
-                                </Collapse>
-                            </TableCell>
-                        </TableRow>
-                    </React.Fragment>
-                    <React.Fragment>
-                        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                            <TableCell>
-                                <IconButton
-                                    aria-label="expand row"
-                                    size="small"
-                                    onClick={() => setOpen(!open)}
-                                >
-                                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                </IconButton>
-                            </TableCell>
-                            <TableCell component="th" scope="row">
-                                Name
-                            </TableCell>
-                            <TableCell align="right">calories</TableCell>
-                            <TableCell align="right">fat</TableCell>
-                            <TableCell align="right">carbs</TableCell>
-                            <TableCell align="right">protein</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                                <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Box sx={{ margin: 1 }}>
-                                        <Typography variant="h6" gutterBottom component="div">
-                                            History
-                                        </Typography>
-                                        <Table size="small" aria-label="purchases">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Date</TableCell>
-                                                    <TableCell>Customer</TableCell>
-                                                    <TableCell align="right">Amount</TableCell>
-                                                    <TableCell align="right">Total price ($)</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                    <TableRow>
-                                                        <TableCell component="th" scope="row">
-                                                           history rơ date
-                                                        </TableCell>
-                                                        <TableCell>customer ID history rơ</TableCell>
-                                                        <TableCell align="right">history rơ amunt</TableCell>
-                                                        <TableCell align="right">
-                                                            tính toán gì đó
-                                                        </TableCell>
-                                                    </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </Box>
-                                </Collapse>
-                            </TableCell>
-                        </TableRow>
-                    </React.Fragment>
-                    <React.Fragment>
-                        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                            <TableCell>
-                                <IconButton
-                                    aria-label="expand row"
-                                    size="small"
-                                    onClick={() => setOpen(!open)}
-                                >
-                                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                </IconButton>
-                            </TableCell>
-                            <TableCell component="th" scope="row">
-                                Name
-                            </TableCell>
-                            <TableCell align="right">calories</TableCell>
-                            <TableCell align="right">fat</TableCell>
-                            <TableCell align="right">carbs</TableCell>
-                            <TableCell align="right">protein</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                                <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Box sx={{ margin: 1 }}>
-                                        <Typography variant="h6" gutterBottom component="div">
-                                            History
-                                        </Typography>
-                                        <Table size="small" aria-label="purchases">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Date</TableCell>
-                                                    <TableCell>Customer</TableCell>
-                                                    <TableCell align="right">Amount</TableCell>
-                                                    <TableCell align="right">Total price ($)</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                    <TableRow>
-                                                        <TableCell component="th" scope="row">
-                                                           history rơ date
-                                                        </TableCell>
-                                                        <TableCell>customer ID history rơ</TableCell>
-                                                        <TableCell align="right">history rơ amunt</TableCell>
-                                                        <TableCell align="right">
-                                                            tính toán gì đó
-                                                        </TableCell>
-                                                    </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </Box>
-                                </Collapse>
-                            </TableCell>
-                        </TableRow>
-                    </React.Fragment>
+                    {users.map((user, index) => {
+                        return (
+                            <React.Fragment>
+                                <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                                    <TableCell>
+                                        <IconButton
+                                            aria-label="expand row"
+                                            size="small">
+                                        </IconButton>
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {user.id}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {user.fullname}
+                                    </TableCell>
+                                    <TableCell align="right">{user.email}</TableCell>
+                                    <TableCell align="right">{user.phone}</TableCell>
+                                    <TableCell align="right">{user.address}</TableCell>
+                                    <TableCell align="right">{user.Orders?.reduce((total)=>{return (total += 1)},0)}</TableCell>
+                                    <TableCell align="right"><Button onClick={()=>navigate(`/admin/users/${user.id}`)} variant="outlined">Xem</Button></TableCell>
+                                </TableRow>
+                            </React.Fragment>
+                        )
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

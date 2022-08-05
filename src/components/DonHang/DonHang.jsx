@@ -17,7 +17,6 @@ export default function DonHang() {
     const notify = (content) => toast(content);
     const {userLogin} = useSelector(state=>state.userReducer)
     const [order, setOrder] = useState([])
-    console.log(order)
     const [change, setChange] = useState(false)
     const handleClicker = (number) => {
         const updateStatus = async () => {

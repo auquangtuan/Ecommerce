@@ -32,7 +32,6 @@ export const CartReducer = (state = stateDefault, action) => {
             return { ...state }
         }
         case TANG_GIAM_ITEM: {
-            console.log(action)
             let cartUpdate = [...state.carts];
             let i = cartUpdate.findIndex(sp => sp.id === action.id);
 

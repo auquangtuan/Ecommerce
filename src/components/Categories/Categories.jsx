@@ -6,7 +6,6 @@ import { DOMAIN } from '../../util/setting/config';
 import axios from 'axios'
 export default function Categories() {
   const [categories,setCategories] = useState([])
-  console.log(categories)
   useEffect(() => {
     axios({
         method: 'get',

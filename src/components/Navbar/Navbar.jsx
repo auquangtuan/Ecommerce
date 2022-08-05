@@ -62,11 +62,12 @@ export default function Navbar() {
 }
 
 const Container = styled.div`
-    height: 60px;
+    max-height: 200px;
 `
 const Wrapper = styled.div`
     padding: 10px 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 `
 const Left = styled.div`

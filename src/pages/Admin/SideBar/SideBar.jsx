@@ -1,44 +1,35 @@
-import React from 'react'
-import "./SideBar.css";
 import {
-  LineStyle,
-  Timeline,
-  TrendingUp,
-  PermIdentity,
-  Storefront,
   AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
+  BarChart, ChatBubbleOutline, DynamicFeed, LineStyle, MailOutline, PermIdentity, Report, Storefront, Timeline,
+  TrendingUp, WorkOutline
 } from "@material-ui/icons";
-import { NavLink, useNavigate } from "react-router-dom";
+import React from 'react';
+import { NavLink } from "react-router-dom";
+import "./SideBar.css";
 export default function SideBar() {
-  const navigate = useNavigate()
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <NavLink  to="/admin" >
-            <li className="sidebarListItem active">
-              <LineStyle className="sidebarIcon" />
-              Home Admin
-            </li>
+            <NavLink to="/admin" >
+              <li className="sidebarListItem active">
+                <LineStyle className="sidebarIcon" />
+                Home Admin
+              </li>
             </NavLink>
             <NavLink to="/" className="link">
-            <li className="sidebarListItem">
-              <LineStyle className="sidebarIcon" />
-              Home Client
-            </li>
+              <li className="sidebarListItem">
+                <LineStyle className="sidebarIcon" />
+                Home Client
+              </li>
             </NavLink>
-            <li className="sidebarListItem">
+            <NavLink to='/admin/analytics' className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
-            </li>
+            </NavLink>
             <li className="sidebarListItem">
               <TrendingUp className="sidebarIcon" />
               Sales
@@ -60,10 +51,10 @@ export default function SideBar() {
                 Products
               </li>
             </NavLink>
-            <li onClick={()=>navigate('/admin/newUser')} className="sidebarListItem">
+            <NavLink to='/admin/newProduct' className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
-              New User
-            </li>
+              New Product
+            </NavLink>
             <NavLink to='/admin/confirm' className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Status

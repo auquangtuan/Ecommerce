@@ -1,10 +1,30 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { DOMAIN } from '../../../util/setting/config'
+import { DOMAIN, TOKEN } from '../../../util/setting/config'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function AllProduct() {
     const navigate = useNavigate()
     const [product, setProduct] = useState([])
+    const [change,setChange] = useState(false)
+    const notify = (content) => toast(content);
+    const deleteItem = (number) => {
+
+        const deleteProduct = async () => {
+            await axios({
+                method: "DELETE",
+                url: `${DOMAIN}/product/${number}`,
+                headers : {"asscess_Token": localStorage.getItem(TOKEN)}
+            }).then(() => {
+                notify("Xóa Thành Công")
+                setChange(!change)
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+        deleteProduct()
+    }
     useEffect(() => {
         const getAllProduct = async () => {
             axios({
@@ -18,13 +38,14 @@ export default function AllProduct() {
             })
         }
         getAllProduct()
-    }, [])
+    }, [change])
     return (
         <>
             <div className="product">
+            <ToastContainer />
                 <div className="productTitleContainer">
                     <h4 className="productTitle">Product</h4>
-                    <Link to={`product/${123}`}>
+                    <Link to={`/admin/newProduct`}>
                         <button className="productAddButton">Create</button>
                     </Link>
                 </div>
@@ -63,6 +84,7 @@ export default function AllProduct() {
                                     </div>
                                 </div>
                                 <button onClick={()=>navigate(`${item.id}`)} className="productAddButton">EDIT</button>
+                                {item.id > 70 ? <button onClick={()=>deleteItem(item.id)} className="productAddButton">XOÁ</button> : ""}
                             </div>
                         )
                     })}

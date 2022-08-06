@@ -1,7 +1,9 @@
 import DonHang from "../components/DonHang/DonHang";
 import Categories from "../components/ProductCategories/Categories";
+import Analytics from "../pages/Admin/Analytics/Analytics";
 import Confirm from "../pages/Admin/Confirm/Confirm";
 import HomeAdmin from "../pages/Admin/HomeAdmin/HomeAdmin";
+import NewProduct from "../pages/Admin/NewProduct/NewProduct";
 import AllProduct from "../pages/Admin/Product/AllProduct";
 import Product from "../pages/Admin/Product/Product";
 import User from "../pages/Admin/User/User";
@@ -24,6 +26,8 @@ const publicRoutes = [
     { path: '/shop', component : Shop},
     { path: '/cart', component : Cart},
     { path: '/admin', component : HomeAdmin, layout : AdminTemplate},
+    { path: '/admin/newProduct', component : NewProduct, layout : AdminTemplate},
+    { path: '/admin/analytics', component : Analytics, layout : AdminTemplate},
     { path: '/admin/products/:id', component : Product, layout : AdminTemplate},
     { path: '/admin/products', component : AllProduct, layout : AdminTemplate},
     { path: '/admin/confirm', component : Confirm, layout : AdminTemplate},

@@ -8,8 +8,10 @@ import { DOMAIN } from '../../util/setting/config';
 import axios from 'axios';
 import { ADD_CART, GET_ONE_PRODUCT } from '../../redux/Constants';
 import Prouduct from '../../components/Product/Prouduct';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function ShopDetails() {
+  const notify = (content) => toast(content);
   const params = useParams()
   const { productDetail } = useSelector(state => state.ProductReducer)
   const [num, setNum] = useState(1)
@@ -18,6 +20,7 @@ export default function ShopDetails() {
     setSize(e.target.value)
   }
   const addCart = (item) => {
+    notify("Thêm Vào Giỏ Hàng Thành Công")
     let name;
     let id = item.id;
     let title = item.title
@@ -73,6 +76,7 @@ export default function ShopDetails() {
   }, [params.id])
   return (
     <Container>
+      <ToastContainer />
       <Wrapper>
         {productDetail?.map((item, index) => {
           return (

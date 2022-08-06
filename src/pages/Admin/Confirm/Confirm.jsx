@@ -18,7 +18,7 @@ export default function Confirm() {
                 data: { 'status': 2 },
                 headers: { 'asscess_Token': localStorage.getItem(TOKEN) }
             }).then((values) => {
-                notify("Sửa Thành Công")
+                notify("Xác Nhận Thành Công")
                 setChange(!change)
             }).catch((err) => {
                 alert("XOAI")
@@ -46,11 +46,11 @@ export default function Confirm() {
         if (number === 1) {
             setOrder(orders.filter(sp => sp.Status.id === 2))
         } else if (number === 2) {
-            setOrder(orders.filter(sp => sp.Status.id === 1))
+            setOrder(orders.filter(sp => sp.Status.id === 1).reverse())
         } else if (number === 3) {
             setOrder(orders.filter(sp => sp.Status.id === 5))
         } else if (number === 4) {
-            setOrder(orders)
+            setOrder(orders).reverse()
         }
     }
 

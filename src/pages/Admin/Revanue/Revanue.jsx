@@ -9,6 +9,7 @@ export default function Revanue() {
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
+
         axios({
             method: 'get',
             url: `${DOMAIN}/orderDetails`,
@@ -38,36 +39,37 @@ export default function Revanue() {
                     }, 0).toLocaleString()}</span>
                     <span className="featuredMoneyRate">
                         %{Math.floor(12)}{" "}
-                        {12 < 0 ? (
+                        {1< 0 ? (
                             <ArrowDownward className="featuredIcon negative" />
                         ) : (
                             <ArrowUpward className="featuredIcon" />
                         )}
                     </span>
                 </div>
-                <span className="featuredSub">Compared to last month</span>
+                <span className="featuredSub">So Với Ngày Trước</span>
             </div>
             <div className="featuredItem">
                 <span className="featuredTitle">Số Đơn Hàng</span>
                 <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">{orders.reduce((toal)=>{return (toal += 1)},0)}</span>
+                    <span className="featuredMoney">{orders.reduce((toal) => { return (toal += 1) }, 0)}</span>
                     <span className="featuredMoneyRate">
                         -1.4 <ArrowDownward className="featuredIcon negative" />
                     </span>
                 </div>
-                <span className="featuredSub">Compared to last month</span>
+                <span className="featuredSub">So Với Ngày Trước</span>
             </div>
             <div className="featuredItem">
                 <span className="featuredTitle">Chờ Xác Nhận</span>
                 <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">{orders.reduce((total, item) => {
+                 <span className="featuredMoney">{orders.reduce((total, item) => {
                         return total += (item.status === 1)
                     }, 0)}</span>
                     <span className="featuredMoneyRate">
-                        +2.4 <ArrowUpward className="featuredIcon" />
+                     +2.3   <ArrowUpward className="featuredIcon" />
                     </span>
                 </div>
-                <span className="featuredSub">Compared to last month</span>
+                <span className="featuredSub">So Với Ngày Trước</span>
+
             </div>
         </div>
     )

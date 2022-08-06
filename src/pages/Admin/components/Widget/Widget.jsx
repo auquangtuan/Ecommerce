@@ -67,7 +67,7 @@ export default function Widget() {
           </tr>
           {order.filter(sp=>sp.status === 1).map((order, index) => {
             return (
-                <tr className="widgetLgTr">
+                <tr className="widgetLgTr" key={index}>
                   <td className="widgetLgUser">
                     <span className="widgetLgName">{order.fullname}</span>
                   </td>
@@ -76,7 +76,7 @@ export default function Widget() {
                   {order.Status?.id === 1 ? <td style={{ textAlign: 'center' }}><button onClick={()=>UpadateStatus(order.id)} style={{ cursor: 'pointer', backgroundColor: 'orange', padding: '4px 16px', borderRadius: '12px', border: 'none', color: '#fff' }} >Confirm</button></td> : <td>Đã Xác Nhận</td>}
                 </tr>
             )
-          })}
+          }).reverse()}
         </table>
       </div>
       <div className="widgetSm">

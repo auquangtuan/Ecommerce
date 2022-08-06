@@ -1,13 +1,14 @@
 
 const stateDefault = {
-    charts : [] 
+    change : ""
 }
 
 
 export const AdminReducer = ( state = stateDefault, action) => {
     switch (action.type) {
-        case "CHART" : {
-            state.charts = action.charts
+        case "CONFIRM" : {
+            console.log(action)
+            state.change = action.change
             return {...state}
         }
         
@@ -15,3 +16,4 @@ export const AdminReducer = ( state = stateDefault, action) => {
             return {...state}
     }
 }
+

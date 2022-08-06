@@ -5,30 +5,38 @@ import axios from 'axios';
 import { DOMAIN, TOKEN } from '../../../../util/setting/config';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Widget() {
   const notify = (content) => toast(content);
   const [users, setUsers] = useState([])
   const [order, setOrder] = useState([])
-  const [change, setChange] = useState([])
+  const [change, setChange] = useState(false)
+  const [changes, setChanges] = useState(false)
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const UpadateStatus = (num) => {
-    const updateStatuses = async () => 
+    const updateStatuses = async () =>
       await axios({
         method: 'put',
         url: `${DOMAIN}/order/setStatus/${num}`,
         data: { 'status': 2 },
         headers: { 'asscess_Token': localStorage.getItem(TOKEN) }
-      }).then((values) => {
+      }).then(() => {
         notify("Sửa Thành Công")
         setChange(!change)
       }).catch((err) => {
-        alert("XOAI")
+        notify("Sửa Thất Bại")
+      }).finally(() => {
+        setChanges(!changes)
+        dispatch({
+          type: "CONFIRM",
+          change: changes
+        })
       })
-      updateStatuses()
-    }
+    updateStatuses()
+  }
 
   useEffect(() => {
     const renderUser = async () => {
@@ -65,16 +73,16 @@ export default function Widget() {
             <th className="widgetLgTh">Địa Chỉ</th>
             <th className="widgetLgTh">Status</th>
           </tr>
-          {order.filter(sp=>sp.status === 1).map((order, index) => {
+          {order.filter(sp => sp.status === 1).map((order, index) => {
             return (
-                <tr className="widgetLgTr" key={index}>
-                  <td className="widgetLgUser">
-                    <span className="widgetLgName">{order.fullname}</span>
-                  </td>
-                  <td className="widgetLgAmount">{order.phone}</td>
-                  <td className="widgetLgAmount">{order.address}</td>
-                  {order.Status?.id === 1 ? <td style={{ textAlign: 'center' }}><button onClick={()=>UpadateStatus(order.id)} style={{ cursor: 'pointer', backgroundColor: 'orange', padding: '4px 16px', borderRadius: '12px', border: 'none', color: '#fff' }} >Confirm</button></td> : <td>Đã Xác Nhận</td>}
-                </tr>
+              <tr className="widgetLgTr" key={index}>
+                <td className="widgetLgUser">
+                  <span className="widgetLgName">{order.fullname}</span>
+                </td>
+                <td className="widgetLgAmount">{order.phone}</td>
+                <td className="widgetLgAmount">{order.address}</td>
+                {order.Status?.id === 1 ? <td style={{ textAlign: 'center' }}><button onClick={() => UpadateStatus(order.id)} style={{ cursor: 'pointer', backgroundColor: 'orange', padding: '4px 16px', borderRadius: '12px', border: 'none', color: '#fff' }} >Confirm</button></td> : <td>Đã Xác Nhận</td>}
+              </tr>
             )
           }).reverse()}
         </table>

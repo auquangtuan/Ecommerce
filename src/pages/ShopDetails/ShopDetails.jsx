@@ -87,8 +87,8 @@ export default function ShopDetails() {
               <InfoContainer>
                 <Title>{item.title}</Title>
                 <Desc>{item.description}</Desc>
-                <Discount>{item.discount.toLocaleString()}đ</Discount>
-                <Price>{item.price.toLocaleString()}đ</Price>
+                <Discount>{item.price.toLocaleString()}đ</Discount>
+                <Price>{item.discount.toLocaleString()}đ</Price>
                 <FilterContainer>
                   <Filter>
                     <FilterTitle>Size</FilterTitle>

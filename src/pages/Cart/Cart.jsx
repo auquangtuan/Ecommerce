@@ -148,7 +148,7 @@ return (
                       <Add onClick={() => handleNumber(item.id, index, true)} />
                     </ProductAmountContainer>
                     <ProductPrice>
-                      {(item.number * item.discount).toLocaleString()}đ
+                      {(item.number * item.price).toLocaleString()}đ
                     </ProductPrice>
                   </PriceDetail>
                   <CloseIcon onClick={() => { deleteItem(item.id) }} style={{ cursor: 'pointer' }} />
@@ -163,7 +163,7 @@ return (
           <SummaryTitle>ORDER SUMMARY</SummaryTitle>
           <SummaryItem>
             <SummaryItemText>Subtotal</SummaryItemText>
-            <SummaryItemPrice>{carts.reduce((total, item) => { return total += (item.discount * item.number) }, 0).toLocaleString()}đ</SummaryItemPrice>
+            <SummaryItemPrice>{carts.reduce((total, item) => { return total += (item.price * item.number) }, 0).toLocaleString()}đ</SummaryItemPrice>
           </SummaryItem>
           <SummaryItem>
             <SummaryItemText>Shipping</SummaryItemText>
@@ -175,7 +175,7 @@ return (
           </SummaryItem>
           <SummaryItem type="total">
             <SummaryItemText>Total</SummaryItemText>
-            <SummaryItemPrice>{carts.reduce((total, item) => { return total += (item.discount * item.number) }, 10000).toLocaleString()}</SummaryItemPrice>
+            <SummaryItemPrice>{carts.reduce((total, item) => { return total += (item.price * item.number) }, 10000).toLocaleString()}</SummaryItemPrice>
           </SummaryItem>
 
           <Buttons onClick={carts.length === 0 ? "" : (handleOpen)} >CHECKOUT NOW</Buttons>

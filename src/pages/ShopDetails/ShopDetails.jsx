@@ -1,15 +1,15 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import styled from 'styled-components';
-import { mobile } from "../../responsive";
-import { Add, AddShoppingCart, Remove } from "@material-ui/icons";
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { DOMAIN } from '../../util/setting/config';
+import { Add, Remove } from "@material-ui/icons";
 import axios from 'axios';
-import { ADD_CART, GET_ONE_PRODUCT } from '../../redux/Constants';
-import Prouduct from '../../components/Product/Prouduct';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styled from 'styled-components';
+import Prouduct from '../../components/Product/Prouduct';
+import { ADD_CART, GET_ONE_PRODUCT } from '../../redux/Constants';
+import { mobile } from "../../responsive";
+import { DOMAIN } from '../../util/setting/config';
 export default function ShopDetails() {
   const notify = (content) => toast(content);
   const params = useParams()
@@ -59,7 +59,7 @@ export default function ShopDetails() {
   const dispatch = useDispatch();
   useEffect(() => {
     const getOneProduct = async () => {
-      const getProductDetail = await axios({
+      await axios({
         method: 'get',
         url: `${DOMAIN}/product/${params.id}`,
         data: productDetail

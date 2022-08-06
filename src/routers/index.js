@@ -13,6 +13,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import RenderUsers from "../pages/RenderUser/RenderUser";
 import RenderUser from "../pages/RenderUser/RenderUser";
+import Search from "../pages/Search/Search";
 import Shop from "../pages/Shop/Shop";
 import ShopDetails from "../pages/ShopDetails/ShopDetails";
 import AdminTemplate from "../Templates/AdminTemplate/AdminTemplate";
@@ -20,6 +21,7 @@ import TemplateFull from "../Templates/TemplateFull/TemplateFull";
 
 const publicRoutes = [
     { path: '/', component: Home },
+    { path: '/search/:name', component: Search },
     { path: '/login', component : Login},
     { path: '/register', component : Register},
     { path: '/product/:id', component : ShopDetails},

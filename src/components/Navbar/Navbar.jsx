@@ -1,19 +1,24 @@
-import { Badge } from '@material-ui/core'
-import { Search, ShoppingCartOutlined } from '@material-ui/icons'
-import React, { Fragment } from 'react'
-import styled from 'styled-components'
-import { useNavigate } from "react-router-dom";
+import { Badge } from '@material-ui/core';
+import { Search, ShoppingCartOutlined } from '@material-ui/icons';
+import React, { Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
 import { USER_LOGIN } from '../../util/setting/config';
-
 export default function Navbar() {
     const { carts } = useSelector(state => state.CartReducer)
     const navigate = useNavigate();
     const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-    
+    const [search,setSearch] = useState("")
     const redirect = () => {
         localStorage.removeItem(USER_LOGIN);
         return navigate('/')
+    }
+    const handleChange = (e) => {
+        navigate(`/search/${e.target.value}`)
+    }
+    const handleClick = () => {
+        navigate(`/search/${search}`)
     }
     const renderInfo = () => {
         if (!userLogin) {
@@ -27,7 +32,7 @@ export default function Navbar() {
             return (
                 <Fragment>
                     <MenuItem>Xin Chào : {userLogin.fullname}</MenuItem>
-                    {userLogin.role === 1 ? <MenuItem onClick={()=>navigate('/admin')}>ADMIN</MenuItem>: <MenuItem onClick={()=>navigate('/donhang')}>Xem Đơn Hàng</MenuItem> }
+                    {userLogin.role === 1 ? <MenuItem onClick={() => navigate('/admin')}>ADMIN</MenuItem> : <MenuItem onClick={() => navigate('/donhang')}>Xem Đơn Hàng</MenuItem>}
                     <MenuItem onClick={() => redirect()}>Đăng Xuất</MenuItem>
                 </Fragment>
             )
@@ -40,8 +45,10 @@ export default function Navbar() {
                 <Left>
                     <Language>VI</Language>
                     <SearchContainer>
-                        <Input />
-                        <Search style={{ color: 'gray', fontSize: 16 }} />
+                        <form onChange={handleChange}>
+                        <Input type='text' onChange={(e)=>setSearch(e.target.value)}/>
+                        </form>
+                        <Search type='submit' onClick={()=>handleClick()} style={{ color: 'gray', fontSize: 16 , cursor: 'pointer'}} />
                     </SearchContainer>
                     <MenuItem onClick={() => navigate('/shop')}>SHOP</MenuItem>
                 </Left>
@@ -97,8 +104,7 @@ const SearchContainer = styled.div`
     padding: 5px;
 `
 const Input = styled.input`
-    border: none;
-    
+    border: none;  
 `
 const Logo = styled.h1`
     font-weight: bold;

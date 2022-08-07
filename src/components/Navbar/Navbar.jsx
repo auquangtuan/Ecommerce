@@ -1,21 +1,19 @@
 import { Badge } from '@material-ui/core';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { USER_LOGIN } from '../../util/setting/config';
-export default function Navbar() {
+export default function Navbar(props) {
+
     const { carts } = useSelector(state => state.CartReducer)
     const navigate = useNavigate();
     const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-    const [search,setSearch] = useState("")
+    const [search, setSearch] = useState("")
     const redirect = () => {
         localStorage.removeItem(USER_LOGIN);
         return navigate('/')
-    }
-    const handleChange = (e) => {
-        navigate(`/search/${e.target.value}`)
     }
     const handleClick = () => {
         navigate(`/search/${search}`)
@@ -38,17 +36,14 @@ export default function Navbar() {
             )
         }
     }
-
     return (
         <Container>
             <Wrapper>
                 <Left>
                     <Language>VI</Language>
                     <SearchContainer>
-                        <form onChange={handleChange}>
-                        <Input type='text' onChange={(e)=>setSearch(e.target.value)}/>
-                        </form>
-                        <Search type='submit' onClick={()=>handleClick()} style={{ color: 'gray', fontSize: 16 , cursor: 'pointer'}} />
+                        <Input type='text' value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <Search type='submit' onClick={() => handleClick()} style={{ color: 'gray', fontSize: 16, cursor: 'pointer' }} />
                     </SearchContainer>
                     <MenuItem onClick={() => navigate('/shop')}>SHOP</MenuItem>
                 </Left>

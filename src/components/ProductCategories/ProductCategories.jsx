@@ -17,7 +17,6 @@ export default function ProuductCategories(props) {
     const notify = () => toast("Thêm Vào Giỏ Hàng Thành Công!");
     const dispatch = useDispatch()
     const [categories, setCategories] = useState([])
-    console.log(categories)
     const navigate = useNavigate()
     const AddCart = (item) => {
         notify();

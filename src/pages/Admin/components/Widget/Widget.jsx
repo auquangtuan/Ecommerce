@@ -47,7 +47,7 @@ export default function Widget() {
       }).then((data) => {
         setUsers(data.data)
       }).catch((err) => {
-        console.log(err)
+        console.log("err")
       })
       await axios({
         method: 'get',

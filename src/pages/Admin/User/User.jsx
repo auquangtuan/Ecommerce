@@ -57,7 +57,7 @@ export default function User() {
                 setChange(!change)
                 notify("Chỉnh Sửa Thành Công")
             }).catch((err)=>{
-                console.log(err)
+                console.log("err")
             })
         }
         putUser()
@@ -72,7 +72,7 @@ export default function User() {
             }).then((data) => {
                 setUser(data.data)
             }).catch((err) => {
-                console.log(err)
+                console.log("err")
             })
         }
         getOneUser()

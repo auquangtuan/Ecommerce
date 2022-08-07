@@ -19,8 +19,8 @@ export default function Categories() {
 }, [])
   return (
     <ContainerWrap>
-      {categories.map((item) => (
-        <Container>
+      {categories.map((item,index) => (
+        <Container key={index}>
           <Link to={`/categories/${item.id}/${item.name}`}>
             <Image src='https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' />
             <Info>

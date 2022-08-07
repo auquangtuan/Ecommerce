@@ -17,6 +17,11 @@ export default function NewProduct() {
     const [categoryID, setCategoryID] = useState()
     const [gender, setGender] = useState()
     const [tag, setTag] = useState()
+    const [S, setS] = useState(47)
+    const [M, setM] = useState(47)
+    const [L, setL] = useState(47)
+    const [XL, setXL] = useState(47)
+    const [XXL, setXXL] = useState(47)
 
     const [change, setChange] = useState(false)
     const params = useParams()
@@ -53,6 +58,11 @@ export default function NewProduct() {
             "category_id": categoryID,
             "tag_id": tag,
             "gender_ID": gender,
+            "S": S,
+            "M": M,
+            "L": L,
+            "XL": XL,
+            "XXL": XXL,
         }
         const putProduct = async () => {
             await axios({
@@ -65,9 +75,8 @@ export default function NewProduct() {
                     "Content-Type": 'multipart/form-data',
                 }
             }).then((data) => {
-                console.log(data)
                 notify("Tạo Thành Công")
-                setTimeout(()=>{navigate(`/admin/products/${data.data.id}`)}, 2000)
+                setTimeout(()=>{navigate(`/admin/products/${data.data.id}`)}, 1300)
             }).catch((err) => {
                 console.log(err)
                 notify("Tạo Thất Bại, Vui Lòng Thử Lại")
@@ -86,7 +95,7 @@ export default function NewProduct() {
             }).then(() => {
                 console.log("Sussess")
             }).catch((err) => {
-                console.log(err)
+                console.log("err")
             })
         }
         getOneProduct()
@@ -116,6 +125,12 @@ export default function NewProduct() {
                             <option value="7">Boxer Nam</option>
                             <option value="8">Giày Nam</option>
                         </select>
+                        <label>Size S</label>
+                        <input type='number' defaultValue={47}  required onChange={(e) => setS(e.target.value)} />
+                        <label>Size M</label>
+                        <input type='number' defaultValue={47}  required onChange={(e) => setM(e.target.value)} />
+                        <label>Size L</label>
+                        <input type='number' defaultValue={47}  required onChange={(e) => setL(e.target.value)} />
                     </div>
                     <div className="productFormLeft">
                         <label>Giá</label>
@@ -138,6 +153,10 @@ export default function NewProduct() {
                             <option value="2">Nữ</option>
                             <option value="3">Unisex</option>
                         </select>
+                        <label>Size XL</label>
+                        <input defaultValue={47} required onChange={(e) => setXL(e.target.value)} type="number" />
+                        <label>Size XXL</label>
+                        <input defaultValue={47} required onChange={(e) => setXXL(e.target.value)} type="number" />
                     </div>
                     <div className="productFormRight">
                         <div className="productUpload">

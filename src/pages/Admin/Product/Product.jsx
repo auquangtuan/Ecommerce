@@ -50,7 +50,7 @@ export default function Product() {
           notify("Chỉnh Sửa Thành Công")
           setChange(!change)
         }).catch((err) => {
-          console.log(err)
+          console.log("err")
         })
       }
       putProduct()
@@ -72,7 +72,7 @@ export default function Product() {
           notify("Chỉnh Sửa Thành Công")
           setChange(!change)
         }).catch((err) => {
-          console.log(err)
+          console.log("err")
         })
       }
       putProduct()
@@ -89,7 +89,7 @@ export default function Product() {
       }).then((data) => {
         setProduct(data.data)
       }).catch((err) => {
-        console.log(err)
+        console.log("err")
       })
     }
     getOneProduct()

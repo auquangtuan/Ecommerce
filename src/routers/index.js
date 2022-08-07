@@ -22,6 +22,7 @@ import TemplateFull from "../Templates/TemplateFull/TemplateFull";
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/search/:name', component: Search },
+    { path: '/search/', component: Search },
     { path: '/login', component : Login},
     { path: '/register', component : Register},
     { path: '/product/:id', component : ShopDetails},

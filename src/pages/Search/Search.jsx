@@ -17,8 +17,6 @@ export default function Search() {
     const [search, setSearch] = useState([])
     const dispatch = useDispatch();
     const params = useParams()
-    console.log(params)
-    console.log(search)
     const navigate = useNavigate()
     const AddCart = (item) => {
         notify();
@@ -31,6 +29,7 @@ export default function Search() {
         navigate(`/product/${number}`)
     }
     useEffect(() => {
+        
         const getProduct = async () => {
             await axios({
                 method: 'GET',

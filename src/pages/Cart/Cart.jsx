@@ -73,7 +73,6 @@ export default function Cart() {
           url: `${DOMAIN}/orderDetails/postOrder`,
           data: values
         }).then((data) => {
-          console.log(data)
           alert("Đặt Hàng Thành Công")
           setOpen(false)
           navigate('/')
@@ -82,7 +81,7 @@ export default function Cart() {
             data
           })
       }).catch ((err) => {
-        console.log("err", err)
+        console.log("err")
       })
     }
     postOrder()

@@ -20,6 +20,7 @@ export default function AllProduct() {
                 notify("Xóa Thành Công")
                 setChange(!change)
             }).catch((err) => {
+                notify(`Lỗi ${err.response.statusText}`)
                 console.log(err)
             })
         }

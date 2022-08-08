@@ -28,20 +28,20 @@ export default function Chart() {
       item.createdAt.slice(0, 10)
     )
   })
-
   const setMapOrder = new Set(orderssing)
   const mapNew = [...setMapOrder]
   for (let i = 0; i < mapNew.length; i++) {
     arrFinaly.push({
-      "Ngày": mapNew[i],
+      "Ngày": mapNew[i].slice(8,10) +"-" + mapNew[i].slice(5,7),
       "Số Lượng Sản Phẩm Đặt": orderMap.filter(sp => sp.date.includes(mapNew[i])).reduce((total, item) => { return (total += item.SL) }, 0),
       "Doanh Thu Theo Giá (Price)": orderMap.filter(sp => sp.date.includes(mapNew[i])).reduce((total, item) => { return (total += item.DT) }, 0),
       "Số Đơn Đặt Trong Ngày": order.filter(sp => sp.createdAt.slice(0, 10).includes(mapNew[i])).reduce((total, item) => { return (total += (1 + 0 * item.order_ID)) }, 0)
     })
   }
+  console.log(arrFinaly)
   return (
     <div className="chart">
-      <h3 className="chartTitle">DASH BOARD</h3>
+      <h3 className="chartTitle">DASH BOARD  (Theo ngày, Sau này sẽ edit theo mỗi tuần hoặc tháng)</h3>
       <ResponsiveContainer width="100%" aspect={4 / 1}>
         <LineChart width={730} height={250} data={arrFinaly}
           margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>

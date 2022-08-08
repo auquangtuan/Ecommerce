@@ -2,9 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import axios from 'axios'
 import { DOMAIN } from '../../../util/setting/config';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 export default function Analytics() {
   const [productSize, setProductSize] = useState([])
-  
+  console.log(productSize)
   const [activeIndex, setActiveIndex] = useState(0)
   const renderActiveShape = ({ cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value }) => {
     const RADIAN = Math.PI / 180;
@@ -61,10 +69,11 @@ export default function Analytics() {
   for (let i = 0; i < cate.length; i++) {
     arrProduct.push({
       "name": cate[i],
-      "value": productSize?.filter(sp => sp.name.includes(cate[i])).reduce((total, item) => { return total += (item.price * item.number) }, 0)
+      "value": productSize?.filter(sp => sp.name.includes(cate[i])).reduce((total, item) => { return total += (item.price * item.number) }, 0),
+      "number": productSize?.filter(sp => sp.name.includes(cate[i])).reduce((total, item) => { return total += item.number }, 0),
     })
   }
-  
+
   const onPieEnter = (_, index) => {
     setActiveIndex(index)
   };
@@ -83,7 +92,7 @@ export default function Analytics() {
   return (
     <div className="featured">
       <div className="featuredItem" style={{ height: 500 }}>
-        <h2>Tổng Doanh Thu : {arrProduct.reduce((total, item)=>{return (total += item.value)},0).toLocaleString()}</h2>
+        <h2>Tổng Doanh Thu : {arrProduct.reduce((total, item) => { return (total += item.value) }, 0).toLocaleString()}</h2>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
             <Pie
@@ -102,23 +111,34 @@ export default function Analytics() {
         </ResponsiveContainer>
       </div>
       <div className="featuredItem" style={{ height: 500 }}>
-        <h2>Tổng Doanh Thu</h2>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
-            <Pie
-              activeIndex={activeIndex}
-              activeShape={renderActiveShape}
-              data={arrProduct}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
-              onMouseEnter={onPieEnter}
-            />
-          </PieChart>
-        </ResponsiveContainer>
+        <h2 style={{marginBottom : 24}}>Trong Đó</h2>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 450 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Tên Danh Mục</TableCell>
+                <TableCell align="center">Tổng Số Lượng Bán</TableCell>
+                <TableCell align="right">Tổng Giá bán</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {arrProduct.map((item, index) => {
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {item.name}
+                    </TableCell>
+                    <TableCell align="center">{item.number}</TableCell>
+                    <TableCell align="right">{item.value.toLocaleString()}đ</TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   )

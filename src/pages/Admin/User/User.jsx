@@ -189,6 +189,7 @@ export default function User() {
                     </div>
                 </div>
             </div>
+                        <h2 style={{marginTop : 24}}>Danh Sách Đặt Hàng Của {user.fullname} </h2>
             <TableContainer component={Paper} style={{ marginTop: '2rem' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>

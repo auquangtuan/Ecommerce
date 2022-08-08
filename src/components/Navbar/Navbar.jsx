@@ -1,5 +1,5 @@
 import { Badge } from '@material-ui/core';
-import { Search, ShoppingCartOutlined } from '@material-ui/icons';
+import { ArrowDropDown, Search, ShoppingCartOutlined } from '@material-ui/icons';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";

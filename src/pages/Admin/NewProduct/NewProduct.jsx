@@ -125,11 +125,11 @@ export default function NewProduct() {
                             <option value="7">Boxer Nam</option>
                             <option value="8">Giày Nam</option>
                         </select>
-                        <label>Size S</label>
+                        <label>Số Lượng Size S</label>
                         <input type='number' defaultValue={47}  required onChange={(e) => setS(e.target.value)} />
-                        <label>Size M</label>
+                        <label>Số Lượng Size M</label>
                         <input type='number' defaultValue={47}  required onChange={(e) => setM(e.target.value)} />
-                        <label>Size L</label>
+                        <label>Số Lượng Size L</label>
                         <input type='number' defaultValue={47}  required onChange={(e) => setL(e.target.value)} />
                     </div>
                     <div className="productFormLeft">
@@ -153,9 +153,9 @@ export default function NewProduct() {
                             <option value="2">Nữ</option>
                             <option value="3">Unisex</option>
                         </select>
-                        <label>Size XL</label>
+                        <label>Số Lượng Size XL</label>
                         <input defaultValue={47} required onChange={(e) => setXL(e.target.value)} type="number" />
-                        <label>Size XXL</label>
+                        <label>Số Lượng Size XXL</label>
                         <input defaultValue={47} required onChange={(e) => setXXL(e.target.value)} type="number" />
                     </div>
                     <div className="productFormRight">

@@ -12,7 +12,6 @@ import Paper from '@mui/material/Paper';
 
 export default function Analytics() {
   const [productSize, setProductSize] = useState([])
-  console.log(productSize)
   const [activeIndex, setActiveIndex] = useState(0)
   const renderActiveShape = ({ cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value }) => {
     const RADIAN = Math.PI / 180;

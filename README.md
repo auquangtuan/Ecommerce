@@ -18,5 +18,4 @@
 #### Backend tự làm gần như 80%, 1 số thứ khá khó em đã tham khảo trên mạng . Nhưng em hiểu gần như 97% những gì đang có tại backend.
 #### Link Backend : https://backendshopping.herokuapp.com/api/api
 #### src Backend  : https://github.com/auquangtuan/shopping-Backend
-#### Không có document, và em chưa validation, backend nhìn chung chưa hoàn thiện vì em làm và học để hiểu hơn về cách mà backend hoạt động, cũng như chủ động hơn trong việc tạo API khi join vào một dự án mà backend chưa có.  Từ đó phía Client em sẽ xử lí tốt hơn. Nhưng em sẽ học thêm để hoàn thiện nó.
 # Em cảm ơn anh (chị) đã quan tâm

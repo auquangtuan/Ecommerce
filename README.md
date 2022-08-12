@@ -6,8 +6,7 @@
 #### ADMIN :  Có thể xem doanh thu, CRUD cơ bản 
 
 ### Người Tạo : Âu Quang Tuấn
-### Trạng Thái : "Chưa Hoàn Thành"
-### Cần có thêm  : "ADMIN Dashboard (đã có 1 số, cần nhiều hơn)"
+### Trạng Thái : "Hoàn Thành Cơ Bản".
 
 #### Có tham khảo video hướng dẫn code (Chỉ front-end) và code lại (vì video code styled component nên em khá bỡ ngỡ, nhưng em vẫn hiểu những gì mình copy)
 #### Xử lí logic và redux em tự làm. Video trên mạng em chỉ xem và code theo phần giao diện. không bao gồm backend và xử lí

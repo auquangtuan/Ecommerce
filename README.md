@@ -15,4 +15,5 @@
 #### Sau đó tự edit lại theo nhu cầu tại : https://dbdiagram.io/d/62caa903cc1bc14cc58b091b
 #### Backend tự làm gần như 80%, 1 số thứ khá khó em đã tham khảo trên mạng . Nhưng em hiểu gần như 97% những gì đang có tại backend.
 #### src Backend  : https://github.com/auquangtuan/shopping-Backend
+#### Nếu chạy dự án này cần cấu hình lại database vì datab
 # Em cảm ơn anh (chị) đã quan tâm

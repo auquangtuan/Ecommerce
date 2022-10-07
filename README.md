@@ -6,6 +6,7 @@
 
 ### Người Tạo : Âu Quang Tuấn
 ### Trạng Thái : "Hoàn Thành Cơ Bản".
+### Em xin lỗi vì chưa deploy lên sever. hiện tại database em sài my SQL nên ch
 
 #### Có tham khảo video hướng dẫn code (Chỉ front-end) và code lại (vì video code styled component nên em khá bỡ ngỡ, nhưng em vẫn hiểu những gì mình copy)
 #### Xử lí logic và redux em tự làm. Video trên mạng em chỉ xem và code theo phần giao diện. không bao gồm backend và xử lí

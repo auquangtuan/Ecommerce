@@ -81,7 +81,7 @@ export default function Cart() {
             data
           })
       }).catch ((err) => {
-        console.log("err")
+        console.log(err)
       })
     }
     postOrder()

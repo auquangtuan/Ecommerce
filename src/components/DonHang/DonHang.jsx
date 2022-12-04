@@ -45,7 +45,7 @@ export default function DonHang() {
         }).catch((err) => {
             
         })
-    }, [change])
+    }, [change, order, userLogin.id])
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -66,13 +66,13 @@ export default function DonHang() {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {row.id}
+                                {row?.id}
                             </TableCell>
-                            <TableCell align="right">{row.price}</TableCell>
+                            <TableCell align="right">{row?.price}</TableCell>
                             {/* <TableCell align="right">{row.number}</TableCell> */}
-                            <TableCell align="right">{row.Order?.Status?.name}</TableCell>
+                            <TableCell align="right">{row?.Order?.Status?.name}</TableCell>
                             {/* <TableCell align="right">{row.protein}</TableCell> */}
-                            {row.Order?.Status?.id === 1 ? <TableCell align="right">Chờ Xác Nhận</TableCell> : <Fragment>{row.Order?.Status?.id === 5 ? <TableCell align="right">Đã Xác Nhận</TableCell> : <TableCell align="right" style={{ textAlign: 'center' }}><button onClick={() => handleClicker(row.order_ID)} style={{ cursor: 'pointer', backgroundColor: 'orange', padding: '4px 16px', borderRadius: '12px', border: 'none', color: '#fff' }} >Đã Nhận</button></TableCell>}</Fragment> }
+                            {row?.Order?.Status?.id === 1 ? <TableCell align="right">Chờ Xác Nhận</TableCell> : <Fragment>{row?.Order?.Status?.id === 5 ? <TableCell align="right">Đã Xác Nhận</TableCell> : <TableCell align="right" style={{ textAlign: 'center' }}><button onClick={() => handleClicker(row?.order_ID)} style={{ cursor: 'pointer', backgroundColor: 'orange', padding: '4px 16px', borderRadius: '12px', border: 'none', color: '#fff' }} >Đã Nhận</button></TableCell>}</Fragment> }
                         </TableRow>
                     ))}
                 </TableBody>

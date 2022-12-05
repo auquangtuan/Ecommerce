@@ -6,8 +6,3 @@
 
 ### Người Tạo : Âu Quang Tuấn
 ### Trạng Thái : "Hoàn Thành Cơ Bản".
-
-### Backend :
-#### Database Tham Khảo : https://dbdiagram.io/d/6167c93f940c4c4eec94bc8d
-#### Sau đó tự edit lại theo nhu cầu tại : https://dbdiagram.io/d/62caa903cc1bc14cc58b091b
-#### src Backend  : https://github.com/auquangtuan/shopping-Backend
